@@ -3,16 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Silicon Rider Bench · Model Comparison</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+SC:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <title>GLM-5-Turbo vs GLM-5.1 vs GPT-5.4 vs MiniMax-M2.7 | Silicon Rider Bench</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-  <link rel="stylesheet" href="./assets/styles.css">
+  <link rel="stylesheet" href="./source-comparison/comparison-report/styles.css">
+  <style>
+    .standalone-nav {
+      max-width: 1420px;
+      margin: 1.2rem auto 0;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .standalone-nav a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg-card);
+      padding: 0.35rem 0.9rem;
+      font-size: 0.76rem;
+      font-family: 'JetBrains Mono', monospace;
+      transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .standalone-nav a:hover,
+    .standalone-nav a.active {
+      color: var(--text-primary);
+      border-color: var(--border-glow);
+      transform: translateY(-1px);
+    }
+  </style>
 </head>
 <body>
-  <main id="comparison-app"></main>
-  <script src="./data/reports-manifest.js"></script>
-  <script src="./assets/comparison.js"></script>
+  <nav class="standalone-nav" aria-label="Standalone site navigation">
+    <a class="active" href="./index.html">比较首页</a>
+    <a href="./reports/index.html">报告列表</a>
+    <a href="./source-comparison/comparison-report.html">原始比较文档</a>
+  </nav>
+
+  <div id="comparison-report-app"></div>
+
+  <script src="./source-comparison/comparison-report/data.js"></script>
+  <script src="./source-comparison/comparison-report/main.js"></script>
 </body>
 </html>
