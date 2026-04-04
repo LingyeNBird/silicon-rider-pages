@@ -80,55 +80,86 @@
       const rounds = parseRoundCount(detailMd);
 
       app.innerHTML = `
-        <div class="report-layout">
-          <nav class="report-nav"><a href="../index.html">← 返回对比页</a><a href="./index.html">查看全部报告</a></nav>
-          <header>
-            <h1 class="report-title ${reportMeta.toneClass}">${reportMeta.displayName} · 单模型报告</h1>
-            <p class="report-sub">从 markdown 自动解析：基本信息、核心指标、详细统计、订单类型分布、评价总结。</p>
+        <div class="container report-page">
+          <nav class="standalone-nav report-nav" aria-label="Standalone site navigation">
+            <a href="../index.html">← 返回对比页</a>
+            <a href="./index.html">查看全部报告</a>
+          </nav>
+
+          <header class="header report-header">
+            <div class="header-badge"><span class="dot"></span>Standalone Single Report</div>
+            <h1><span class="${reportMeta.toneClass}">${reportMeta.displayName}</span><span class="header-separator"> · </span>单模型报告</h1>
+            <p class="subtitle">从 markdown 自动解析并可视化：基本信息、核心指标、详细统计、订单类型分布、评价总结。</p>
           </header>
 
-          <section class="kpi-grid">
-            <article class="kpi-card"><div class="kpi-key">总利润</div><div class="kpi-val">${coreMetrics['总利润'] || `¥${reportMeta.stats.profit.toFixed(2)}`}</div></article>
-            <article class="kpi-card"><div class="kpi-key">完成订单</div><div class="kpi-val">${coreMetrics['完成订单数'] || reportMeta.stats.completedOrders}</div></article>
-            <article class="kpi-card"><div class="kpi-key">准时率</div><div class="kpi-val">${coreMetrics['准时率'] || `${reportMeta.stats.onTimeRate}%`}</div></article>
-            <article class="kpi-card"><div class="kpi-key">API 违规率</div><div class="kpi-val">${coreMetrics['API 违规率'] || `${reportMeta.stats.apiViolationRate}%`}</div></article>
-          </section>
-
-          <section class="report-grid">
-            <div class="panel">
-              <h2 class="section-title">指标可视化</h2>
-              <p class="section-desc">柱图：关键业务指标。饼图：订单类型分布。</p>
-              <canvas id="report-metric-chart"></canvas>
-              <div class="list-block">
-                <canvas id="order-mix-chart"></canvas>
+          <section class="model-card report-hero-card" style="--report-accent:${reportMeta.accent}">
+            <div class="report-hero-top">
+              <div>
+                <div class="model-meta">seed ${reportMeta.seed} · ${reportMeta.runtime} · ${reportMeta.stats.calls} calls · ${reportMeta.stats.totalTokens.toLocaleString()} tokens</div>
+                <div class="profit report-hero-profit">${coreMetrics['总利润'] || `¥${reportMeta.stats.profit.toFixed(2)}`}</div>
+              </div>
+              <div class="report-pill-row">
+                <div class="report-pill"><span>路径效率</span><strong>${coreMetrics['路径效率'] || reportMeta.stats.pathEfficiency}</strong></div>
+                <div class="report-pill"><span>平均每单利润</span><strong>${detailStats['平均每单利润'] || `¥${reportMeta.stats.avgProfitPerOrder.toFixed(2)}`}</strong></div>
+                <div class="report-pill"><span>平均超时时长</span><strong>${detailStats['平均超时时长'] || `${reportMeta.stats.avgOvertimeMinutes} 分钟`}</strong></div>
               </div>
             </div>
+          </section>
 
-            <aside class="panel">
+          <section class="report-kpi-grid">
+            <article class="stat-item report-kpi-card"><div class="stat-label">总利润</div><div class="stat-value">${coreMetrics['总利润'] || `¥${reportMeta.stats.profit.toFixed(2)}`}</div></article>
+            <article class="stat-item report-kpi-card"><div class="stat-label">完成订单</div><div class="stat-value">${coreMetrics['完成订单数'] || reportMeta.stats.completedOrders}</div></article>
+            <article class="stat-item report-kpi-card"><div class="stat-label">准时率</div><div class="stat-value">${coreMetrics['准时率'] || `${reportMeta.stats.onTimeRate}%`}</div></article>
+            <article class="stat-item report-kpi-card"><div class="stat-label">API 违规率</div><div class="stat-value">${coreMetrics['API 违规率'] || `${reportMeta.stats.apiViolationRate}%`}</div></article>
+          </section>
+
+          <section class="report-main-grid">
+            <article class="radar-overlay-wrapper report-panel">
+              <h2 class="section-title">指标可视化</h2>
+              <p class="section-desc">柱图展示关键业务指标，环图展示订单类型结构。</p>
+              <div class="chart-card">
+                <canvas id="report-metric-chart"></canvas>
+              </div>
+              <div class="chart-card list-block">
+                <canvas id="order-mix-chart"></canvas>
+              </div>
+            </article>
+
+            <aside class="table-wrapper report-panel report-side-panel">
               <div class="list-block">
-                <div class="list-title">基本信息</div>
+                <h3 class="list-title">基本信息</h3>
                 <ul class="kv-list">${renderKVList(basicInfo)}</ul>
               </div>
               <div class="list-block">
-                <div class="list-title">详细统计</div>
+                <h3 class="list-title">详细统计</h3>
                 <ul class="kv-list">${renderKVList(detailStats)}</ul>
               </div>
             </aside>
           </section>
 
-          <section class="panel">
+          <section class="table-wrapper report-panel report-summary-panel">
             <h2 class="section-title">评价总结</h2>
-            <ul class="kv-list">
-              ${evaluation.map((line) => `<li><span>${line}</span><strong></strong></li>`).join('')}
+            <ul class="evaluation-list">
+              ${evaluation
+                .map((line) => {
+                  const stateClass = line.includes('✅') ? 'is-good' : line.includes('❌') ? 'is-bad' : 'is-warn';
+                  return `<li class="${stateClass}"><span>${line}</span></li>`;
+                })
+                .join('')}
             </ul>
-            <div class="report-meta">
-              <p>Conversation rounds in detail report: <strong class="mono">${rounds}</strong></p>
-              <p>Summary file: <span class="mono">${reportMeta.summaryPath}</span></p>
-              <p>Detail file: <span class="mono">${reportMeta.detailPath}</span></p>
+            <div class="report-meta-grid">
+              <div class="report-meta-item"><div class="stat-label">Conversation rounds</div><div class="stat-value mono">${rounds}</div></div>
+              <div class="report-meta-item"><div class="stat-label">Summary file</div><div class="stat-value mono">${reportMeta.summaryPath}</div></div>
+              <div class="report-meta-item"><div class="stat-label">Detail file</div><div class="stat-value mono">${reportMeta.detailPath}</div></div>
             </div>
           </section>
         </div>
       `;
+
+      const rootStyle = getComputedStyle(document.documentElement);
+      const textSecondary = rootStyle.getPropertyValue('--text-secondary').trim() || 'rgba(232,232,240,0.7)';
+      const gridColor = rootStyle.getPropertyValue('--border').trim() || 'rgba(232,232,240,0.12)';
+      const cardBg = rootStyle.getPropertyValue('--bg-card').trim() || '#16161f';
 
       const metricCanvas = document.getElementById('report-metric-chart');
       if (metricCanvas) {
@@ -160,17 +191,17 @@
                 beginAtZero: true,
                 max: 100,
                 ticks: {
-                  color: 'rgba(235,239,255,0.6)',
-                  backdropColor: 'transparent',
-                },
-                grid: { color: 'rgba(235,239,255,0.12)' },
-              },
-              x: {
-                ticks: { color: 'rgba(235,239,255,0.7)' },
-                grid: { color: 'rgba(235,239,255,0.04)' },
-              },
-            },
-            plugins: {
+                   color: textSecondary,
+                   backdropColor: 'transparent',
+                 },
+                 grid: { color: gridColor },
+               },
+               x: {
+                 ticks: { color: textSecondary },
+                 grid: { color: gridColor },
+               },
+             },
+             plugins: {
               legend: { display: false },
             },
           },
@@ -190,30 +221,32 @@
             datasets: [
               {
                 data: [food, supermarket, pharmacy],
-                backgroundColor: [reportMeta.accent, '#60a5fa', '#f59e0b'],
-                borderColor: '#111524',
-                borderWidth: 2,
-              },
-            ],
+                 backgroundColor: [reportMeta.accent, '#22d3ee', '#eab308'],
+                 borderColor: cardBg,
+                 borderWidth: 2,
+               },
+             ],
           },
           options: {
             plugins: {
               legend: {
-                labels: {
-                  color: 'rgba(235,239,255,0.75)',
-                },
-              },
-            },
+                 labels: {
+                   color: textSecondary,
+                 },
+               },
+             },
           },
         });
       }
     })
     .catch((error) => {
       app.innerHTML = `
-        <div class="report-layout">
-          <nav class="report-nav"><a href="../index.html">← 返回对比页</a><a href="./index.html">查看全部报告</a></nav>
-          <p>Failed to load report markdown files.</p>
-          <pre class="mono">${String(error)}</pre>
+        <div class="container report-page">
+          <nav class="standalone-nav report-nav"><a href="../index.html">← 返回对比页</a><a href="./index.html">查看全部报告</a></nav>
+          <section class="table-wrapper report-panel">
+            <h2 class="section-title">Failed to load report markdown files.</h2>
+            <pre class="mono report-error">${String(error)}</pre>
+          </section>
         </div>
       `;
     });
