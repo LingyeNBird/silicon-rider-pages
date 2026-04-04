@@ -4,10 +4,106 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Silicon Rider Bench · Reports</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+SC:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../source-comparison/comparison-report/styles.css">
+  <style>
+    .standalone-nav {
+      max-width: 1420px;
+      margin: 1.2rem auto 0;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .standalone-nav a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg-card);
+      padding: 0.35rem 0.9rem;
+      font-size: 0.76rem;
+      font-family: 'JetBrains Mono', monospace;
+      transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .standalone-nav a:hover,
+    .standalone-nav a.active {
+      color: var(--text-primary);
+      border-color: var(--border-glow);
+      transform: translateY(-1px);
+    }
+
+    .report-list-card::before {
+      background: linear-gradient(90deg, var(--report-accent), transparent);
+    }
+
+    .report-list-card .model-name {
+      color: var(--report-accent);
+    }
+
+    .report-list-card .profit {
+      color: var(--report-accent);
+    }
+
+    .report-actions {
+      margin-top: 1rem;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .report-primary-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid var(--report-accent);
+      color: var(--report-accent);
+      text-decoration: none;
+      font-weight: 700;
+      background: color-mix(in oklab, var(--report-accent), transparent 90%);
+      transition: 0.25s transform, 0.25s border-color;
+    }
+
+    .report-primary-link:hover {
+      transform: translateY(-1px);
+      border-color: color-mix(in oklab, var(--report-accent), #ffffff 18%);
+    }
+
+    .report-secondary-links {
+      display: grid;
+      gap: 0.55rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .report-secondary-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.4rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.78rem;
+      transition: 0.25s color, 0.25s border-color, 0.25s transform;
+    }
+
+    .report-secondary-link:hover {
+      color: var(--text-primary);
+      border-color: var(--border-glow);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 760px) {
+      .report-secondary-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <main id="reports-list-app"></main>

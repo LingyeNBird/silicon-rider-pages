@@ -54,7 +54,6 @@
       <nav class="top-nav">
         <a class="top-nav-link active" href="./index.html">比较首页</a>
         <a class="top-nav-link" href="./reports/index.html">报告列表</a>
-        <a class="top-nav-link" href="${manifest.sourceArchive.comparisonPage}">原始比较文档</a>
       </nav>
     `;
   }
