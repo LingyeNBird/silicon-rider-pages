@@ -86,8 +86,8 @@
   function renderRadarOverlaySection() {
     const legendItems = report.models
       .map(
-        (model) => `
-          <div class="legend-item">
+        (model, index) => `
+          <div class="legend-item" data-model-index="${index}">
             <span class="legend-dot" style="background:${model.chart.color}"></span>
             ${model.name}
           </div>
@@ -117,7 +117,8 @@
         const cells = report.models
           .map((model, index) => {
             const isBest = model.id === row.bestModelId;
-            const className = isBest ? `best-cell ${row.bestTone}` : '';
+            const isWorst = model.id === row.worstModelId;
+            const className = isBest ? `best-cell ${row.bestTone}` : isWorst ? 'worst-cell' : '';
             return `<td class="${className}">${row.values[index]}</td>`;
           })
           .join('');
@@ -369,6 +370,7 @@
   }
 
   const overlayOptions = JSON.parse(JSON.stringify(commonChartOptions));
+  overlayOptions.animation = { duration: 280, easing: 'easeInOutQuart' };
   overlayOptions.plugins.legend = {
     display: true,
     position: 'bottom',
@@ -394,13 +396,71 @@
     };
   });
 
-  new Chart(overlayCanvas, {
+  const overlayChart = new Chart(overlayCanvas, {
     type: 'radar',
     data: {
       labels: radarLabels,
       datasets: overlayDatasets,
     },
     options: overlayOptions,
+  });
+
+  // Hover interaction: highlight hovered model, fade others
+  const legendElItems = document.querySelectorAll('.legend-item[data-model-index]');
+  const originalDatasets = overlayDatasets.map((ds) => ({
+    borderColor: ds.borderColor,
+    backgroundColor: ds.backgroundColor,
+    borderWidth: ds.borderWidth,
+    pointRadius: ds.pointRadius,
+  }));
+
+  legendElItems.forEach((item) => {
+    const index = parseInt(item.dataset.modelIndex, 10);
+
+    item.addEventListener('mouseenter', () => {
+      overlayChart.data.datasets.forEach((dataset, dsIndex) => {
+        const model = report.models[dsIndex];
+        if (dsIndex === index) {
+          // Highlight: full opacity, thicker border
+          dataset.borderColor = model.chart.color;
+          dataset.backgroundColor = model.chart.overlayBg.replace(/[\d.]+\)$/, '0.28)');
+          dataset.borderWidth = 3.5;
+          dataset.pointRadius = 7;
+        } else {
+          // Fade: very low opacity
+          dataset.borderColor = model.chart.color + '25';
+          dataset.backgroundColor = 'transparent';
+          dataset.borderWidth = 1;
+          dataset.pointRadius = 0;
+        }
+      });
+      overlayChart.update();
+
+      legendElItems.forEach((li, liIndex) => {
+        if (liIndex === index) {
+          li.classList.add('highlighted');
+          li.classList.remove('faded');
+        } else {
+          li.classList.add('faded');
+          li.classList.remove('highlighted');
+        }
+      });
+    });
+
+    item.addEventListener('mouseleave', () => {
+      overlayChart.data.datasets.forEach((dataset, dsIndex) => {
+        const orig = originalDatasets[dsIndex];
+        dataset.borderColor = orig.borderColor;
+        dataset.backgroundColor = orig.backgroundColor;
+        dataset.borderWidth = orig.borderWidth;
+        dataset.pointRadius = orig.pointRadius;
+      });
+      overlayChart.update();
+
+      legendElItems.forEach((li) => {
+        li.classList.remove('highlighted', 'faded');
+      });
+    });
   });
 
   const coreRows = report.sections.coreMetrics.rows;

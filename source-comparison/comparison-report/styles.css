@@ -333,7 +333,12 @@ body::before {
   margin: 3rem 0;
 }
 
-.radar-container,
+.radar-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
 .behavior-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -352,6 +357,12 @@ body::before {
 
 .radar-chart-wrapper {
   padding: 1.1rem;
+  min-width: 0;
+}
+
+.radar-chart-wrapper canvas {
+  width: 100% !important;
+  max-height: 320px;
 }
 
 .radar-chart-wrapper h3 {
@@ -379,6 +390,23 @@ body::before {
   gap: 0.45rem;
   color: var(--text-secondary);
   font-size: 0.82rem;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  transition: opacity 0.2s ease, background 0.2s ease;
+  user-select: none;
+}
+
+.legend-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.legend-item.faded {
+  opacity: 0.3;
+}
+
+.legend-item.highlighted {
+  opacity: 1;
 }
 
 .legend-dot {
@@ -434,6 +462,11 @@ tbody tr:hover {
 
 .best-cell {
   font-weight: 800;
+}
+
+.worst-cell {
+  color: var(--red);
+  font-weight: 700;
 }
 
 .change-badge {
@@ -652,18 +685,24 @@ tbody tr:hover {
 
 @media (max-width: 1280px) {
   .model-cards,
-  .radar-container,
   .behavior-grid,
   .token-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .radar-container {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 900px) {
   .model-cards,
-  .radar-container,
   .behavior-grid,
   .token-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .radar-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
