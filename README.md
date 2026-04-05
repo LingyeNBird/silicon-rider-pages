@@ -16,6 +16,7 @@
 - GLM-5.1
 - GPT-5.4
 - MiniMax-M2.7
+- Grok 4.20 Beta
 
 ## 本地预览
 
@@ -50,7 +51,8 @@ silicon-rider-pages/
 │  ├─ glm-5-turbo.html
 │  ├─ glm-5-1.html
 │  ├─ gpt-5-4.html
-│  └─ minimax-m2-7.html
+│  ├─ minimax-m2-7.html
+│  └─ grok-420-beta.html
 └─ source-comparison/
 ```
 

@@ -56,6 +56,10 @@
   color: var(--minimax);
 }
 
+.tone-grok420 {
+  color: var(--grok420);
+}
+
 .report-hero-card {
   margin-top: 1.6rem;
   border-radius: 18px;
