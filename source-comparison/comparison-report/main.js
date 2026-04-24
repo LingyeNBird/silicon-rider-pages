@@ -137,7 +137,7 @@
       <div class="comparison-table">
         <div class="section-title">${report.sections.coreMetrics.title}</div>
         <div class="section-desc">${report.sections.coreMetrics.desc}</div>
-        <div class="table-wrapper">
+        <div class="table-wrapper metrics-table-wrapper">
           <table>
             <thead>
               <tr>

@@ -14,7 +14,9 @@
   --glm51: #06b6d4;
   --gpt54: #a855f7;
   --gpt55nt: #fb7185;
+  --gpt54high: #c026d3;
   --deepseekv4pro: #6366f1;
+  --deepseekv4flash: #38bdf8;
   --minimax: #10b981;
   --grok420: #3b82f6;
   --green: #22c55e;
@@ -49,7 +51,9 @@ body::before {
     radial-gradient(ellipse at 40% 30%, rgba(6, 182, 212, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 70% 70%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 78% 42%, rgba(251, 113, 133, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 56% 34%, rgba(192, 38, 211, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 64% 18%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 28% 78%, rgba(56, 189, 248, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 85% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 50% 90%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
   z-index: -1;
@@ -188,8 +192,16 @@ body::before {
   background: linear-gradient(90deg, var(--gpt55nt), transparent);
 }
 
+.model-card.gpt54high::before {
+  background: linear-gradient(90deg, var(--gpt54high), transparent);
+}
+
 .model-card.deepseekv4pro::before {
   background: linear-gradient(90deg, var(--deepseekv4pro), transparent);
+}
+
+.model-card.deepseekv4flash::before {
+  background: linear-gradient(90deg, var(--deepseekv4flash), transparent);
 }
 
 .model-card.minimax::before {
@@ -238,11 +250,25 @@ body::before {
   color: var(--gpt55nt);
 }
 
+.gpt54high .model-name,
+.gpt54high-text,
+.gpt54high-color,
+.fuchsia {
+  color: var(--gpt54high);
+}
+
 .deepseekv4pro .model-name,
 .deepseekv4pro-text,
 .deepseekv4pro-color,
 .indigo {
   color: var(--deepseekv4pro);
+}
+
+.deepseekv4flash .model-name,
+.deepseekv4flash-text,
+.deepseekv4flash-color,
+.sky {
+  color: var(--deepseekv4flash);
 }
 
 .minimax .model-name,
@@ -300,8 +326,16 @@ body::before {
   color: var(--gpt55nt);
 }
 
+.gpt54high .profit {
+  color: var(--gpt54high);
+}
+
 .deepseekv4pro .profit {
   color: var(--deepseekv4pro);
+}
+
+.deepseekv4flash .profit {
+  color: var(--deepseekv4flash);
 }
 
 .minimax .profit {
@@ -387,6 +421,15 @@ body::before {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 16px;
+}
+
+.metrics-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.metrics-table-wrapper table {
+  min-width: 1500px;
 }
 
 .radar-chart-wrapper {
@@ -641,9 +684,19 @@ tbody tr:hover {
   color: var(--gpt55nt);
 }
 
+.gpt54high .tag {
+  background: rgba(192, 38, 211, 0.15);
+  color: var(--gpt54high);
+}
+
 .deepseekv4pro .tag {
   background: rgba(99, 102, 241, 0.15);
   color: var(--deepseekv4pro);
+}
+
+.deepseekv4flash .tag {
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--deepseekv4flash);
 }
 
 .minimax .tag {
@@ -698,8 +751,16 @@ tbody tr:hover {
   background: var(--gpt55nt);
 }
 
+.gpt54high .behavior-list li::before {
+  background: var(--gpt54high);
+}
+
 .deepseekv4pro .behavior-list li::before {
   background: var(--deepseekv4pro);
+}
+
+.deepseekv4flash .behavior-list li::before {
+  background: var(--deepseekv4flash);
 }
 
 .minimax .behavior-list li::before {
