@@ -52,6 +52,10 @@
   color: var(--gpt54);
 }
 
+.tone-gpt55nt {
+  color: var(--gpt55nt);
+}
+
 .tone-minimax {
   color: var(--minimax);
 }

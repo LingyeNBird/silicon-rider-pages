@@ -1,6 +1,6 @@
 window.reportManifest = {
   pageTitle: 'Silicon Rider Bench · Level 1 Comparison',
-  subtitle: '五款模型在 Level 1（24h）模拟中的收益、准时与策略差异对比',
+  subtitle: '六款模型在 Level 1（24h）模拟中的收益、准时与策略差异对比',
   reports: [
     {
       id: 'glm-5-turbo',
@@ -87,6 +87,35 @@ window.reportManifest = {
         overtimeOrders: 3,
         avgOvertimeMinutes: 0.3,
         orders: { food: 27, supermarket: 3, pharmacy: 1 },
+      },
+    },
+    {
+      id: 'gpt-5-5-no-thinking',
+      displayName: 'GPT-5.5（不思考）',
+      toneClass: 'tone-gpt55nt',
+      accent: '#fb7185',
+      seed: 91997,
+      runtime: '~25min',
+      reportPage: './reports/gpt-5-5-no-thinking.html',
+      summaryPath: '../data/raw-reports/report-level1-1777018317965.md',
+      detailPath: '../data/raw-reports/report-level1-1777018317965-detail.md',
+      stats: {
+        calls: 579,
+        totalTokens: 983815,
+        profit: 451.26,
+        completedOrders: 33,
+        onTimeRate: 51.5,
+        pathEfficiency: 1.86,
+        apiViolationRate: 0.5,
+        totalDistance: 529.0,
+        optimalDistance: 284.0,
+        batterySwaps: 11,
+        totalIncome: 456.76,
+        totalPenalty: 85.31,
+        avgProfitPerOrder: 13.67,
+        overtimeOrders: 16,
+        avgOvertimeMinutes: 12.3,
+        orders: { food: 25, supermarket: 7, pharmacy: 1 },
       },
     },
     {
