@@ -14,6 +14,7 @@
   --glm51: #06b6d4;
   --gpt54: #a855f7;
   --gpt55nt: #fb7185;
+  --deepseekv4pro: #6366f1;
   --minimax: #10b981;
   --grok420: #3b82f6;
   --green: #22c55e;
@@ -48,6 +49,7 @@ body::before {
     radial-gradient(ellipse at 40% 30%, rgba(6, 182, 212, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 70% 70%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 78% 42%, rgba(251, 113, 133, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 64% 18%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 85% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 50% 90%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
   z-index: -1;
@@ -186,6 +188,10 @@ body::before {
   background: linear-gradient(90deg, var(--gpt55nt), transparent);
 }
 
+.model-card.deepseekv4pro::before {
+  background: linear-gradient(90deg, var(--deepseekv4pro), transparent);
+}
+
 .model-card.minimax::before {
   background: linear-gradient(90deg, var(--minimax), transparent);
 }
@@ -230,6 +236,13 @@ body::before {
 .gpt55nt-color,
 .rose {
   color: var(--gpt55nt);
+}
+
+.deepseekv4pro .model-name,
+.deepseekv4pro-text,
+.deepseekv4pro-color,
+.indigo {
+  color: var(--deepseekv4pro);
 }
 
 .minimax .model-name,
@@ -285,6 +298,10 @@ body::before {
 
 .gpt55nt .profit {
   color: var(--gpt55nt);
+}
+
+.deepseekv4pro .profit {
+  color: var(--deepseekv4pro);
 }
 
 .minimax .profit {
@@ -624,6 +641,11 @@ tbody tr:hover {
   color: var(--gpt55nt);
 }
 
+.deepseekv4pro .tag {
+  background: rgba(99, 102, 241, 0.15);
+  color: var(--deepseekv4pro);
+}
+
 .minimax .tag {
   background: rgba(16, 185, 129, 0.15);
   color: var(--minimax);
@@ -674,6 +696,10 @@ tbody tr:hover {
 
 .gpt55nt .behavior-list li::before {
   background: var(--gpt55nt);
+}
+
+.deepseekv4pro .behavior-list li::before {
+  background: var(--deepseekv4pro);
 }
 
 .minimax .behavior-list li::before {
