@@ -13,6 +13,7 @@
   --turbo: #f97316;
   --glm51: #06b6d4;
   --gpt54: #a855f7;
+  --gpt55nt: #fb7185;
   --minimax: #10b981;
   --grok420: #3b82f6;
   --green: #22c55e;
@@ -46,6 +47,7 @@ body::before {
     radial-gradient(ellipse at 10% 15%, rgba(249, 115, 22, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 40% 30%, rgba(6, 182, 212, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 70% 70%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 78% 42%, rgba(251, 113, 133, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 85% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 50% 90%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
   z-index: -1;
@@ -139,7 +141,7 @@ body::before {
 
 .model-cards {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin: 2.2rem 0;
 }
@@ -180,6 +182,10 @@ body::before {
   background: linear-gradient(90deg, var(--gpt54), transparent);
 }
 
+.model-card.gpt55nt::before {
+  background: linear-gradient(90deg, var(--gpt55nt), transparent);
+}
+
 .model-card.minimax::before {
   background: linear-gradient(90deg, var(--minimax), transparent);
 }
@@ -217,6 +223,13 @@ body::before {
 .gpt54-color,
 .purple {
   color: var(--gpt54);
+}
+
+.gpt55nt .model-name,
+.gpt55nt-text,
+.gpt55nt-color,
+.rose {
+  color: var(--gpt55nt);
 }
 
 .minimax .model-name,
@@ -268,6 +281,10 @@ body::before {
 
 .gpt54 .profit {
   color: var(--gpt54);
+}
+
+.gpt55nt .profit {
+  color: var(--gpt55nt);
 }
 
 .minimax .profit {
@@ -341,7 +358,7 @@ body::before {
 
 .behavior-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
 
@@ -535,7 +552,7 @@ tbody tr:hover {
 
 .token-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin-top: 1rem;
 }
@@ -602,6 +619,11 @@ tbody tr:hover {
   color: var(--gpt54);
 }
 
+.gpt55nt .tag {
+  background: rgba(251, 113, 133, 0.15);
+  color: var(--gpt55nt);
+}
+
 .minimax .tag {
   background: rgba(16, 185, 129, 0.15);
   color: var(--minimax);
@@ -648,6 +670,10 @@ tbody tr:hover {
 
 .gpt54 .behavior-list li::before {
   background: var(--gpt54);
+}
+
+.gpt55nt .behavior-list li::before {
+  background: var(--gpt55nt);
 }
 
 .minimax .behavior-list li::before {
