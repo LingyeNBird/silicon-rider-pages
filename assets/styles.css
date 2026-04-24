@@ -60,6 +60,14 @@
   color: var(--deepseekv4pro);
 }
 
+.tone-deepseekv4flash {
+  color: var(--deepseekv4flash);
+}
+
+.tone-gpt54high {
+  color: var(--gpt54high);
+}
+
 .tone-minimax {
   color: var(--minimax);
 }
