@@ -1,6 +1,6 @@
 window.reportManifest = {
   pageTitle: 'Silicon Rider Bench · Level 1 Comparison',
-  subtitle: '六款模型在 Level 1（24h）模拟中的收益、准时与策略差异对比',
+  subtitle: '七款模型在 Level 1（24h）模拟中的收益、准时与策略差异对比',
   reports: [
     {
       id: 'glm-5-turbo',
@@ -116,6 +116,35 @@ window.reportManifest = {
         overtimeOrders: 16,
         avgOvertimeMinutes: 12.3,
         orders: { food: 25, supermarket: 7, pharmacy: 1 },
+      },
+    },
+    {
+      id: 'deepseek-v4-pro',
+      displayName: 'DeepSeek V4 Pro',
+      toneClass: 'tone-deepseekv4pro',
+      accent: '#6366f1',
+      seed: 333619,
+      runtime: '~69min',
+      reportPage: './reports/deepseek-v4-pro.html',
+      summaryPath: '../data/raw-reports/report-level1-1777027141677.md',
+      detailPath: '../data/raw-reports/report-level1-1777027141677-detail.md',
+      stats: {
+        calls: 518,
+        totalTokens: 2040384,
+        profit: 380.58,
+        completedOrders: 28,
+        onTimeRate: 42.9,
+        pathEfficiency: 1.22,
+        apiViolationRate: 1.0,
+        totalDistance: 350.9,
+        optimalDistance: 287.7,
+        batterySwaps: 8,
+        totalIncome: 384.58,
+        totalPenalty: 124.18,
+        avgProfitPerOrder: 13.59,
+        overtimeOrders: 16,
+        avgOvertimeMinutes: 16.7,
+        orders: { food: 22, supermarket: 3, pharmacy: 3 },
       },
     },
     {
