@@ -112,11 +112,17 @@
       .map((model) => `<th><span class="${model.tableToneClass}">${model.name}</span></th>`)
       .join('');
 
-    const rows = report.sections.coreMetrics.rows
+      const rows = report.sections.coreMetrics.rows
       .map((row) => {
+        const bestModelIds = Array.isArray(row.bestModelIds)
+          ? new Set(row.bestModelIds)
+          : row.bestModelId
+            ? new Set([row.bestModelId])
+            : new Set();
+
         const cells = report.models
           .map((model, index) => {
-            const isBest = model.id === row.bestModelId;
+            const isBest = bestModelIds.has(model.id);
             const isWorst = model.id === row.worstModelId;
             const className = isBest ? `best-cell ${row.bestTone}` : isWorst ? 'worst-cell' : '';
             return `<td class="${className}">${row.values[index]}</td>`;

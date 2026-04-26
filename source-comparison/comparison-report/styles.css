@@ -15,6 +15,8 @@
   --gpt54: #a855f7;
   --gpt55nt: #fb7185;
   --gpt54high: #c026d3;
+  --mimo25: #f59e0b;
+  --mimo25pro: #eab308;
   --deepseekv4pro: #6366f1;
   --deepseekv4flash: #38bdf8;
   --minimax: #10b981;
@@ -52,6 +54,8 @@ body::before {
     radial-gradient(ellipse at 70% 70%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 78% 42%, rgba(251, 113, 133, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 56% 34%, rgba(192, 38, 211, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 74% 12%, rgba(245, 158, 11, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 8%, rgba(234, 179, 8, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 64% 18%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 28% 78%, rgba(56, 189, 248, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 85% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
@@ -196,6 +200,14 @@ body::before {
   background: linear-gradient(90deg, var(--gpt54high), transparent);
 }
 
+.model-card.mimo25::before {
+  background: linear-gradient(90deg, var(--mimo25), transparent);
+}
+
+.model-card.mimo25pro::before {
+  background: linear-gradient(90deg, var(--mimo25pro), transparent);
+}
+
 .model-card.deepseekv4pro::before {
   background: linear-gradient(90deg, var(--deepseekv4pro), transparent);
 }
@@ -255,6 +267,20 @@ body::before {
 .gpt54high-color,
 .fuchsia {
   color: var(--gpt54high);
+}
+
+.mimo25 .model-name,
+.mimo25-text,
+.mimo25-color,
+.amber {
+  color: var(--mimo25);
+}
+
+.mimo25pro .model-name,
+.mimo25pro-text,
+.mimo25pro-color,
+.gold {
+  color: var(--mimo25pro);
 }
 
 .deepseekv4pro .model-name,
@@ -328,6 +354,14 @@ body::before {
 
 .gpt54high .profit {
   color: var(--gpt54high);
+}
+
+.mimo25 .profit {
+  color: var(--mimo25);
+}
+
+.mimo25pro .profit {
+  color: var(--mimo25pro);
 }
 
 .deepseekv4pro .profit {
@@ -438,7 +472,7 @@ body::before {
 }
 
 .radar-chart-wrapper canvas {
-  width: 100% !important;
+  width: 100%;
   max-height: 320px;
 }
 
@@ -513,15 +547,15 @@ thead th {
   border-bottom: 1px solid var(--border);
 }
 
-thead th:not(:first-child),
-tbody td:not(:first-child) {
-  text-align: center;
-}
-
 tbody td {
   padding: 0.78rem 1rem;
   border-bottom: 1px solid var(--border);
   font-size: 0.88rem;
+}
+
+thead th:not(:first-child),
+tbody td:not(:first-child) {
+  text-align: center;
 }
 
 tbody td:not(:first-child) {
@@ -687,6 +721,16 @@ tbody tr:hover {
 .gpt54high .tag {
   background: rgba(192, 38, 211, 0.15);
   color: var(--gpt54high);
+}
+
+.mimo25 .tag {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--mimo25);
+}
+
+.mimo25pro .tag {
+  background: rgba(234, 179, 8, 0.15);
+  color: var(--mimo25pro);
 }
 
 .deepseekv4pro .tag {

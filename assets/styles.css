@@ -68,6 +68,14 @@
   color: var(--gpt54high);
 }
 
+.tone-mimo25 {
+  color: var(--mimo25);
+}
+
+.tone-mimo25pro {
+  color: var(--mimo25pro);
+}
+
 .tone-minimax {
   color: var(--minimax);
 }
