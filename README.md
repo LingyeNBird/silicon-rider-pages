@@ -15,6 +15,14 @@
 - GLM-5-Turbo
 - GLM-5.1
 - GPT-5.4
+- GPT-5.5(none)
+- DeepSeek V4 Pro
+- DeepSeek V4 Flash
+- GPT-5.4（high）
+- GPT-5.6-sol(none)
+- GPT-5.6-sol（high）
+- mimo-v2.5(high)
+- mimo-v2.5-pro(high)
 - MiniMax-M2.7
 - Grok 4.20 Beta
 

@@ -68,6 +68,14 @@
   color: var(--gpt54high);
 }
 
+.tone-gpt56solnt {
+  color: var(--gpt56solnt);
+}
+
+.tone-gpt56solhigh {
+  color: var(--gpt56solhigh);
+}
+
 .tone-mimo25 {
   color: var(--mimo25);
 }
